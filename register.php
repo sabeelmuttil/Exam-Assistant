@@ -5,7 +5,7 @@
   <html>
   <head>
     <title>
-      Admin Register 
+      Admin Register
     </title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
       <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
@@ -13,7 +13,7 @@
 
       <link rel="stylesheet" href="css/style.css">
       <script src="js/index.js"></script>
-  
+
   </head>
   <body>
     <div class="pen-title">
@@ -33,7 +33,7 @@
         <input type="text" id="usrname" required="required"/>
         <label for="lbltext">Username</label>
           <div class="bar">
-            
+
           </div>
       </div>
 
@@ -41,7 +41,7 @@
         <input type="txt" id="email" required="required"/>
         <label for="lblemail">Email Id</label>
           <div class="bar">
-            
+
           </div>
       </div>
 
@@ -49,7 +49,7 @@
         <input type="Password" id="pass" required="required"/>
         <label for="lblpsd">Password</label>
          <div class="bar">
-           
+
          </div>
       </div>
 

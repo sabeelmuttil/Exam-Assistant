@@ -35,7 +35,7 @@
         		<label for="">Email</label>
         		<div class="bar"></div>
       		</div>
-			  
+
 			<div class="input-container">
         		<input type="text" id="class" required="required"/>
         		<label for="">Class</label>
@@ -56,7 +56,7 @@
     	  </form>
   		</div>
 
-  
+
 </div>
 	</body>
 </html>
