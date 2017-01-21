@@ -1,6 +1,6 @@
 # Welcome to Exam-Assistant
 ### A php based online competitive exam assistant software
-### This repo contains source code for the Exam-Assistant
+#### This repo contains source code for the Exam-Assistant
 
 ---
 
