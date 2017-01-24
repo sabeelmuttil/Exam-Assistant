@@ -1,3 +1,4 @@
+
 <?php
 
 	// this will avoid mysql_connect() deprecation error.
