@@ -1,10 +1,8 @@
-<<<<<<< Updated upstream
-
 <?php
   ob_start();
   session_start();
   require_once 'dbconnect.php';
-  
+
   // if session is not set this will redirect to login page
   if( !isset($_SESSION['admi']) ) {
     header("Location: admin.php");
@@ -26,20 +24,20 @@
 	$error = false;
 
 	if ( isset($_POST['btnreg']) ) {
-		
+
 		// clean user inputs to prevent sql injections
 		$name = trim($_POST['name']);
 		$name = strip_tags($name);
 		$name = htmlspecialchars($name);
-		
+
 		$email = trim($_POST['email']);
 		$email = strip_tags($email);
 		$email = htmlspecialchars($email);
-		
+
 		$pass = trim($_POST['pass']);
 		$pass = strip_tags($pass);
 		$pass = htmlspecialchars($pass);
-		
+
 		// basic name validation
 		if (empty($name)) {
 			$error = true;
@@ -48,15 +46,15 @@
 			$error = true;
 			$nameError = "Name must contain alphabets and space.";
 		}
-		
+
 		//basic email validation
-		if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) 
+		if ( !filter_var($email,FILTER_VALIDATE_EMAIL) )
 		{
 			$error = true;
 			$emailError = "Please enter valid email address.";
-		} 
-		
-		else 
+		}
+
+		else
 		{
         // check email exist or not
 			$query = "SELECT admemail FROM admin WHERE admemail='$email'";
@@ -76,16 +74,16 @@
 			$error = true;
 			$passError = "Password must have atleast 6 characters.";
 		}
-		
+
 		// password encrypt using SHA256();
 		$password = hash('sha256', $pass);
-		
+
 		// if there's no error, continue to signup
 		if( !$error ) {
-			
+
 			$query = "INSERT INTO admin(admname,admemail,admpass) VALUES('$name','$email','$password')";
 			$res = mysql_query($query);
-				
+
 			if ($conn->$res===true) {
 				$errTyp = "success";
 				$errMSG = "Successfully registered, you may login now";
@@ -94,12 +92,12 @@
 				unset($pass);
 			} else {
 				$errTyp = "danger";
-				$errMSG = "Something went wrong, try again later...";	
-			}	
-				
+				$errMSG = "Something went wrong, try again later...";
+			}
+
 		}
-		
-		
+
+
 	}
 ?>
   <!DOCTYPE html>
@@ -108,9 +106,9 @@
 	  	<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	  
+
     <title>
-      Admin Register 
+      Admin Register
     </title>
 	  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 	  <meta name="viewport" content="width=device-width" />
@@ -134,10 +132,10 @@
 
       <link rel="stylesheet" href="css/style.css">
       <script src="js/index.js"></script>
-  
+
   </head>
   <body>
-	  
+
 	  <div class="wrapper">
 		  <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
@@ -248,7 +246,7 @@
                 </div>
             </div>
         </nav>
-	 <div class="content"> 
+	 <div class="content">
 		 <div class="pen-title">
 			 <h1>App name</h1>
 		 </div>
@@ -294,7 +292,7 @@
 		 	</div>
 		  </div>
 	  </div>
-	  </div>	  
+	  </div>
   </body>
   </html>
 <?php ob_end_flush(); ?>
