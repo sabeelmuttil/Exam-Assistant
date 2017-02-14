@@ -11,7 +11,10 @@
   // select loggedin users detail
   $res=mysql_query("SELECT * FROM admin WHERE admid=".$_SESSION['admi']);
   $userRow=mysql_fetch_array($res);
+  
+  
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -39,24 +42,53 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="css/demo.css" rel="stylesheet" />
 
-
     <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='css/font.css' rel='stylesheet' type='text/css'>
     <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
+	
+	<script src="js/jquery-1.9.1.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+    $('#btn').click(function(){
+        if (this.checked) {
+            $('#mytxt').removeAttr("disabled");
+            $('#mytxt2').removeAttr("disabled");
+            $('#mytxt3').removeAttr("disabled");
+			$('#mytxt4').removeAttr("disabled");
+            $('#mytxt5').removeAttr("disabled");
+            $('#mytxt6').removeAttr("disabled");
+			$('#mytxt7').removeAttr("disabled");
+            $('#mytxt8').removeAttr("disabled");
+            $('#mytxt9').removeAttr("disabled");
+        } else {
+            $("#mytxt").attr("disabled", true);
+            $("#mytxt2").attr("disabled", true);
+            $("#mytxt3").attr("disabled", true);
+			$("#mytxt4").attr("disabled", true);
+            $("#mytxt5").attr("disabled", true);
+            $("#mytxt6").attr("disabled", true);
+			$("#mytxt7").attr("disabled", true);
+            $("#mytxt8").attr("disabled", true);
+            $("#mytxt9").attr("disabled", true);
+        }
+    });
+});
+	</script>
 </head>
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
 
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                <a href="http://ninjaturtles.tk/" target="_blank" class="simple-text">
+                    Ninja Turtles
                 </a>
             </div>
 
@@ -102,52 +134,22 @@
                     <a class="navbar-brand" href="#">Profile</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret"></b>
-                                    <span class="notification">5</span>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="">
-                               Account
-                            </a>
-                        </li>
+						
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     Dropdown
                                     <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+                                
+								 <li>
+                           			<a href="">
+										<?php echo $userRow['admname']; ?>
+									</a>
+								 </li>
+								  <li><a href="user.php">Account</a></li>
                               </ul>
                         </li>
                         <li>
@@ -172,46 +174,42 @@
                             <div class="content">
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Company (disabled)</label>
-                                                <input type="text" class="form-control" disabled placeholder="Company" value="Creative Code Inc.">
+                                                <label>Name of School / College</label>
+                                                <input id="mytxt" disabled="disabled" type="text" class="form-control" placeholder="School / College Name" value="<?php echo $userRow['schlname']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Username</label>
-                                                <input type="text" class="form-control" placeholder="Username" value="michael23">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" placeholder="Email">
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control" placeholder="Company" value="Mike">
+                                                <label>Username</label>
+                                                <input id="mytxt2" disabled="disabled" type="text" class="form-control" placeholder="Username" value="<?php echo $userRow['admname']; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                                                <label>Name </label>
+                                                <input id="mytxt3" disabled="disabled" type="text" class="form-control" placeholder="Name" value="<?php echo $userRow['name']; ?>">
                                             </div>
                                         </div>
                                     </div>
-
+									<div class="row">
+										<div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email address</label>
+                                                <input id="mytxt4" disabled="disabled" type="email" class="form-control" placeholder="Email" value="<?php echo $userRow['admemail']; ?>">
+                                            </div>
+                                        </div>
+									</div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                                                <input id="mytxt5" disabled="disabled" type="text" class="form-control" placeholder="Home Address" value="<?php echo $userRow['address']; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -220,19 +218,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <input type="text" class="form-control" placeholder="City" value="Mike">
+                                                <input id="mytxt6" disabled="disabled" type="text" class="form-control" placeholder="City" value="<?php echo $userRow['city']; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Country</label>
-                                                <input type="text" class="form-control" placeholder="Country" value="Andrew">
+                                                <input id="mytxt7" disabled="disabled" type="text" class="form-control" placeholder="Country" value="<?php echo $userRow['country']; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Postal Code</label>
-                                                <input type="number" class="form-control" placeholder="ZIP Code">
+                                                <input id="mytxt8" disabled="disabled" type="number" class="form-control" placeholder="ZIP Code" value="<?php echo $userRow['zip']; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -241,17 +239,27 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>About Me</label>
-                                                <textarea rows="5" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
+                                                <input id="mytxt9" disabled="disabled" type="text" height="50" class="form-control" placeholder="Here can be your description" value="<?php echo $userRow['about']; ?>"></textarea>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+									
+									<div class="row">
+                                        <div class="col-md-3">
+                                    		<input type="checkbox" class="btn btn-info btn-fill pull-left" id="btn">
+											<p>Edit</p>
+										</div>
+										<div class="col-md-3">
+											<button type="submit" id="" class="btn btn-info btn-fill pull-right">Update Profile</button>
+										</div>
+									</div>
+									
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
                         </div>
                     </div>
+					
                     <div class="col-md-4">
                         <div class="card card-user">
                             <div class="image">
@@ -260,23 +268,26 @@
                             <div class="content">
                                 <div class="author">
                                      <a href="#">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="..."/>
+                                    <img class="avatar border-gray" src="img/ico.png" alt="..."/>
 
-                                      <h4 class="title">Mike Andrew<br />
-                                         <small>michael24</small>
+                                      <h4 class="title">Ninja Turtles<br />
+                                         <small>---------???</small>
                                       </h4>
                                     </a>
                                 </div>
-                                <p class="description text-center"> "Lamborghini Mercy <br>
-                                                    Your chick she so thirsty <br>
-                                                    I'm in that two seat Lambo"
+                                <p class="description text-center"> "This used for an education purpose, <br>
+                                                    And this developed by <br>
+                                                    <b>Anas and Sabeel</b> "
                                 </p>
                             </div>
                             <hr>
                             <div class="text-center">
-                                <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                                <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                                <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
+								
+                                <button href="#" class="btn btn-simple"><i class="fa fa-facebook" style="font-size:24px;"></i></button>
+									
+                                <button href="#" class="btn btn-simple"><i class="fa fa-twitter" style="font-size:24px;"></i></button>
+								
+								<button href="#" class="btn btn-simple"><i class="fa fa-youtube-square" style="font-size:24px;"></i></button>
 
                             </div>
                         </div>
@@ -289,33 +300,11 @@
 
         <footer class="footer">
             <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; 2016 <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+				<center>
+                <p class="copyright pull">
+                    &copy; 2017 <a href="http://ninjaturtles.tk/" target="_blank">Ninja Turtles</a>, made for an education purpose
                 </p>
+				</center>
             </div>
         </footer>
 
@@ -326,26 +315,24 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+	<script src="js/bootstrap-checkbox-radio-switch.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+	<script src="js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+    <script src="js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
+   
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="assets/js/light-bootstrap-dashboard.js"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<script src="js/demo.js"></script>
 
 </html>
 <?php ob_end_flush(); ?>

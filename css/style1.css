@@ -1,0 +1,18 @@
+input#fb{
+    background:url(img/fb.png);
+    background-repeat: no-repeat;
+    width:40px;
+    height:40px;
+}
+input#ggl{
+    background:url(../search-icon.png);
+    background-repeat: no-repeat;
+    width:40px;
+    height:40px;
+}
+input#tt{
+    background:url(../search-icon.png);
+    background-repeat: no-repeat;
+    width:40px;
+    height:40px;
+}
