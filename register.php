@@ -1,26 +1,17 @@
-
 <?php
   ob_start();
   session_start();
   require_once 'dbconnect.php';
   
   // if session is not set this will redirect to login page
-  if( !isset($_SESSION['admi']) ) {
+  if( !isset($_SESSION['admi'])!="" ) {
     header("Location: admin.php");
     exit;
   }
   // select loggedin users detail
   $res=mysql_query("SELECT * FROM admin WHERE admid=".$_SESSION['admi']);
   $userRow=mysql_fetch_array($res);
-?>
 
-<?php
-	ob_start();
-	session_start();
-	if( isset($_SESSION['user'])!="" ){
-		header("Location: dash.php");
-	}
-	include_once 'dbconnect.php';
 
 	$error = false;
 
@@ -148,7 +139,7 @@
 				</div>
 
 				<ul class="nav">
-					<li class="active">
+					<li >
 						<a href="dash.php">
 							<i class="pe-7s-home"></i>
 							<p>Dashboard</p>
@@ -166,7 +157,7 @@
 							<p>Result</p>
 						</a>
 					</li>
-					<li>
+					<li class="active">
 						<a href="register.php">
 							<i class="pe-7s-bell"></i>
 							<p>Add Admin's</p>
