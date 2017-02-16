@@ -63,7 +63,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li >
                     <a href="dash.php">
                         <i class="pe-7s-home"></i>
                         <p>Dashboard</p>
@@ -75,7 +75,7 @@
                         <p>User Profile</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="table.php">
                         <i class="pe-7s-note2"></i>
                         <p>Result</p>
