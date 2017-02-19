@@ -112,13 +112,15 @@
 
 	  <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
-	  <link href="css/demo.css" rel="stylesheet" />
 
 	  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-	  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+	  
+	  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+	  
 	  <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	  
       <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
       <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
@@ -129,118 +131,123 @@
   <body>
 	  
 	  <div class="wrapper">
-		  <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="purple" data-image="img/sidebar-3.jpg">
 
-    		<div class="sidebar-wrapper">
-				<div class="logo">
-					<a href="http://www.creative-tim.com" class="simple-text">
-						Creative Tim
-					</a>
-				</div>
-
-				<ul class="nav">
-					<li >
-						<a href="dash.php">
-							<i class="pe-7s-home"></i>
-							<p>Dashboard</p>
-						</a>
-					</li>
-					<li>
-                    	<a href="user.php">
-                        	<i class="pe-7s-user"></i>
-                        	<p>User Profile</p>
-                    	</a>
-					</li>
-					<li>
-						<a href="table.php">
-							<i class="pe-7s-note2"></i>
-							<p>Result</p>
-						</a>
-					</li>
-					<li class="active">
-						<a href="register.php">
-							<i class="pe-7s-bell"></i>
-							<p>Add Admin's</p>
-						</a>
-					</li>
-				</ul>
-    		</div>
-		  </div>
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
-	  <div class="main-panel">
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="http://ninjaturtles.tk/" target="_blank" class="simple-text">
+                    Two Bits
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li >
+                    <a href="dash.php">
+                        <i class="pe-7s-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li >
+                    <a href="user.php">
+                        <i class="pe-7s-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="table.php">
+                        <i class="pe-7s-note2"></i>
+                        <p>Result</p>
+                    </a>
+                </li>
+				<li class="active">
+                    <a href="register.php">
+                        <i class="pe-7s-users"></i>
+                        <p>Add Admin's</p>
+                    </a>
+                </li>
+				<li>
+                    <a href="qtionmangr.php">
+                        <i class="pe-7s-pen"></i>
+                        <p>Quotation Manager</p>
+                    </a>
+                </li>
+				
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    
+                    <a class="navbar-brand" href="#">Profile</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret"></b>
-                                    <span class="notification">5</span>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="">
-                               Account
-                            </a>
-                        </li>
+						
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    Dropdown
+								  
+                                    <?php echo $userRow['admname']; ?>
                                     <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+								  <li>
+									  <a href="user.php">Account</a>
+								  </li>
+								  
+								 <li >
+									 <a href="dash.php">
+										 
+										 <p>Dashboard</p>
+									 </a>
+								  </li>
+								  <li >
+									  <a href="user.php">
+										  
+										  <p>User Profile</p>
+									  </a>
+								  </li>
+								  <li>
+									  <a href="table.php">
+										  
+										  <p>Result</p>
+									  </a>
+                				  </li>
+								  <li>
+									  <a href="register.php">
+										   
+										   <p>Add Admin's</p>
+									  </a>
+							     </li>
+								 <li>
+									 <a href="qtionmangr.php">
+										
+										 <p>Quotation Manager</p>
+									 </a>
+								  </li>
+								  <li>
+									  <a href="logout.php?logout">
+                                Log out
+									  </a>
+								  </li>
                               </ul>
                         </li>
-                        <li>
-                            <a href="logout.php?logout" class="active">
-                                Log out
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
         </nav>
+										
+
 	 <div class="content"> 
 		 <div class="pen-title">
-			 <h1>App name</h1>
+			 <h1>Exam-Assistant</h1>
 		 </div>
 
 		 <div class="container">
@@ -275,7 +282,7 @@
 								<?php echo $passError; ?>
 							</div>
 		  				</div>
-
+								<?php echo $errMSG; ?>
 		  				<div class="button-container">
 		  					<button type="submit" name="btnreg"><span>Next</span></button>
 		  				</div>
@@ -283,8 +290,37 @@
 				</div>
 		 	</div>
 		  </div>
-	  </div>
+	  
+		  <footer class="footer">
+            <div class="container-fluid">
+				<center>
+                <p class="copyright pull">
+                    &copy; 2017 <a href="http://twobits.tk/" target="_blank">Two Bits</a>, made for an education purpose
+                </p>
+				</center>
+            </div>
+        </footer>
+		</div>
 	  </div>	  
   </body>
+	  
+	  <!--   Core JS Files   -->
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="js/bootstrap-checkbox-radio-switch.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="js/bootstrap-notify.js"></script>
+
+   
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="js/light-bootstrap-dashboard.js"></script>
+
+
   </html>
 <?php ob_end_flush(); ?>
