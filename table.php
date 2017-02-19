@@ -36,10 +36,6 @@
     <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
 
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="css/demo.css" rel="stylesheet" />
-
-
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
@@ -50,15 +46,15 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
+    <div class="sidebar" data-color="purple" data-image="img/sidebar-3.jpg">
 
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                <a href="http://ninjaturtles.tk/" target="_blank" class="simple-text">
+                    Two Bits
                 </a>
             </div>
 
@@ -69,7 +65,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
+                <li >
                     <a href="user.php">
                         <i class="pe-7s-user"></i>
                         <p>User Profile</p>
@@ -83,8 +79,14 @@
                 </li>
 				<li>
                     <a href="register.php">
-                        <i class="pe-7s-bell"></i>
+                        <i class="pe-7s-users"></i>
                         <p>Add Admin's</p>
+                    </a>
+                </li>
+				<li>
+                    <a href="qtionmangr.php">
+                        <i class="pe-7s-pen"></i>
+                        <p>Quotation Manager</p>
                     </a>
                 </li>
 				
@@ -96,72 +98,67 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Table List</a>
+                    
+                    <a class="navbar-brand" href="#">Profile</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret"></b>
-                                    <span class="notification">5</span>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="">
-                               Account
-                            </a>
-                        </li>
+						
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    Dropdown
+								  
+                                    <?php echo $userRow['admname']; ?>
                                     <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
+								  <li>
+									  <a href="user.php">Account</a>
+								  </li>
+								  
+								 <li >
+									 <a href="dash.php">
+										 
+										 <p>Dashboard</p>
+									 </a>
+								  </li>
+								  <li >
+									  <a href="user.php">
+										  
+										  <p>User Profile</p>
+									  </a>
+								  </li>
+								  <li>
+									  <a href="table.php">
+										  
+										  <p>Result</p>
+									  </a>
+                				  </li>
+								  <li>
+									  <a href="register.php">
+										   
+										   <p>Add Admin's</p>
+									  </a>
+							     </li>
+								 <li>
+									 <a href="qtionmangr.php">
+										
+										 <p>Quotation Manager</p>
+									 </a>
+								  </li>
+								  <li>
+									  <a href="logout.php?logout">
+                                Log out
+									  </a>
+								  </li>
                               </ul>
                         </li>
-                        <li>
-                            <a href="logout.php?logout">
-                                Log out
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
         </nav>
+										
 
 
         <div class="content">
@@ -305,33 +302,11 @@
 
         <footer class="footer">
             <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; 2016 <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+				<center>
+                <p class="copyright pull">
+                    &copy; 2017 <a href="http://twobits.tk/" target="_blank">Two Bits</a>, made for an education purpose
                 </p>
+				</center>
             </div>
         </footer>
 
@@ -343,26 +318,26 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+	<script src="js/bootstrap-checkbox-radio-switch.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+	<script src="js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+    <script src="js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+	<script src="js/light-bootstrap-dashboard.js"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<script src="js/demo.js"></script>
 
 
 </html>

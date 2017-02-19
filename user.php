@@ -57,6 +57,7 @@
 			$error = true;
 			$nameError = "Name must contain alphabets and space.";
 		}
+		
 		$admid=$userRow['admid'];
 		// if there's no error, continue to update
 		if( !$error ) {
@@ -65,18 +66,18 @@
 			$res = mysql_query($query);
 				
 			if ($conn->$res===true) {
-				$errTyp = "success";
-				$errMSG = "Successfully updated";
-
-			} else {
 				$errTyp = "danger";
-				$errMSG = "Something went wrong, try again later...";	
+				$errMSG = "Something went wrong, try again later...";
+				
+		
+			} else {
+					$errTyp = "success";
+					$errMSG = "Successfully updated";
 			}	
 				
 		
 		}
-		
-		
+
 	}
 
 
@@ -119,14 +120,15 @@
 				
 				if ($conn->$res===true) 
 				{
-					$errTyp = "success";
-					$errMSG = "Successfully update, you'r password'";
-				unset($pass);
+					$errTyp1 = "danger";
+					$errMSG1 = "Something went wrong, try again later...";	
 				} 
 				else 
 				{
-					$errTyp = "danger";
-					$errMSG = "Something went wrong, try again later...";	
+					
+					$errTyp1 = "success";
+					$errMSG1 = "Successfully update, you'r password'";
+					unset($pass);
 				}	
 		
 			  }
@@ -148,7 +150,7 @@
 	<link rel="icon" type="image/png" href="img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>Exam-Assistant</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -162,10 +164,6 @@
 
     <!--  Light Bootstrap Table core CSS    -->
     <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="css/demo.css" rel="stylesheet" />
 
     <!--     Fonts and icons     -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -215,7 +213,15 @@
 							$("#pass2").attr("disabled", true);
 						}
 				});
-		});
+			
+			        
+		});	
+	
+			function myFunction()
+				{
+					location.reload();
+				}
+
 		
 	</script>
 </head>
@@ -255,10 +261,17 @@
                 </li>
 				<li>
                     <a href="register.php">
-                        <i class="pe-7s-bell"></i>
+                        <i class="pe-7s-users"></i>
                         <p>Add Admin's</p>
                     </a>
                 </li>
+				<li>
+                    <a href="qtionmangr.php">
+                        <i class="pe-7s-pen"></i>
+                        <p>Question Manager</p>
+                    </a>
+                </li>
+				
             </ul>
     	</div>
     </div>
@@ -267,12 +280,7 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                    
                     <a class="navbar-brand" href="#">Profile</a>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -281,22 +289,50 @@
 						
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								  
                                     <?php echo $userRow['admname']; ?>
                                     <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-                                
+								  <li>
+									  <a href="user.php">Account</a>
+								  </li>
+								  
+								 <li >
+									 <a href="dash.php">
+										 
+										 <p>Dashboard</p>
+									 </a>
+								  </li>
+								  <li >
+									  <a href="user.php">
+										  
+										  <p>User Profile</p>
+									  </a>
+								  </li>
+								  <li>
+									  <a href="table.php">
+										  
+										  <p>Result</p>
+									  </a>
+                				  </li>
+								  <li>
+									  <a href="register.php">
+										   
+										   <p>Add Admin's</p>
+									  </a>
+							     </li>
 								 <li>
-                           			<a href="">
+									 <a href="qtionmangr.php">
 										
-									</a>
-								 </li>
-								  <li><a href="user.php">Account</a></li>
+										 <p>Question Manager</p>
+									 </a>
+								  </li>
 								  <li>
 									  <a href="logout.php?logout">
                                 Log out
 									  </a>
-                        </li>
+								  </li>
                               </ul>
                         </li>
                         
@@ -304,7 +340,7 @@
                 </div>
             </div>
         </nav>
-
+										
 
         <div class="content">
             <div class="container-fluid">
@@ -312,11 +348,18 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile</h4>
-                            </div>
+
+                                		<h4 class="title">Edit Profile</h4>
+                                		
+											<button type="submit" id="btnrelod" name="btnrelod" 	onclick="myFunction()" class="btn btn-info btn-fill pull-right">Page Refresh</button>
+								
+							</div>
+							
                             <div class="content">
-                                <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                                <form method="post" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+									
                                     <div class="row">
+										
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Name of School / College</label>
@@ -386,7 +429,7 @@
                                             </div>
                                         </div>
                                     </div>
-									
+									<?php echo $errMSG; ?>
 									<div class="row">
                                         <div class="col-md-3">
                                     		<input type="checkbox" class="btn btn-info btn-fill pull-left" id="btn">
@@ -395,10 +438,16 @@
 										<div class="col-md-3">
 											<button type="submit" id="btnupdate" name="btnupdate" class="btn btn-info btn-fill pull-right">Update Profile</button>
 										</div>
+										<!--<button onclick="refun()">Refresh</button>-->
 									</div>
 								
 								
 								<hr/>
+									<div class="header">
+
+                                		<h4 class="title">Edit Password</h4>
+									
+									</div>
 										<div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -412,14 +461,14 @@
                                                 <input id="pass2" name="pass2" disabled="disabled" type="password" class="form-control" placeholder="Re-Enter Password" value="">
                                             </div>
                                         </div>
-											<?php echo $errMSG; ?>
+											<?php echo $errMSG1; ?>
    											<?php echo $passError; ?>
 
                                     </div>
 									<div class="row">
 										<div class="col-md-3">
                                     		<input type="checkbox" class="btn btn-info btn-fill pull-left" id="bttnpass">
-											<p>Edit Password</p>
+											<p>Edit</p>
 										</div>
 										<div class="col-md-3">
 											<button type="submit" id="btnpass" name="btnpass" class="btn btn-info btn-fill pull-right">Update Password</button>
@@ -457,7 +506,7 @@
 								
                                 <button href="#" class="btn btn-simple"><i class="fa fa-facebook" style="font-size:24px;"></i></button>
 									
-                                <button href="#" class="btn btn-simple"><i class="fa fa-twitter" style="font-size:24px;"></i></button>
+                                <button href="#" class="btn btn-simple"><i class="fa fa-globe" style="font-size:24px;"></i></button>
 								
 								<button href="#" class="btn btn-simple"><i class="fa fa-youtube-square" style="font-size:24px;"></i></button>
 
@@ -501,10 +550,10 @@
 
    
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+	<script src="js/light-bootstrap-dashboard.js"></script>
 
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="js/demo.js"></script>
+
+
 
 </html>
 <?php ob_end_flush(); ?>
