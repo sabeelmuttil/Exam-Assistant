@@ -15,11 +15,12 @@ inline bool exist(const std::string& name)
 
 int main (int argc, char *argv[])
 {
+								int COUNT=0;
 								//cout << argv[1] << endl;
 								//contains argument 1
 								//check if exam exists;
 								if(argc>1) {
-																static int COUNT=atoi(argv[1]);
+																COUNT=atoi(argv[1]);
 								}
 								int seedval;
 								int trees[1000]={0};
@@ -30,6 +31,11 @@ int main (int argc, char *argv[])
 																seedvalpool>>seedval;
 																ifstream trees;//question list (selected)
 																trees.open("trees.pool");
+																for(int i = 0; i < COUNT; ++i)
+																{
+																								trees >> Stree[i];
+																}
+
 
 								}
 								else{
