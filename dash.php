@@ -90,7 +90,7 @@
 				<li>
                     <a href="qtionmangr.php">
                         <i class="pe-7s-pen"></i>
-                        <p>Quotation Manager</p>
+                        <p>Question Manager</p>
                     </a>
                 </li>
 				
@@ -147,7 +147,7 @@
 								 <li>
 									 <a href="qtionmangr.php">
 										
-										 <p>Quotation Manager</p>
+										 <p>Question Manager</p>
 									 </a>
 								  </li>
 								  <li>

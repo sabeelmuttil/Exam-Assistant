@@ -87,7 +87,7 @@
 		
       <div class="input-container">
         <input type="email" name="email" required="required" value="<?php echo $email; ?>" maxlength="40" />
-        <label>Username</label>
+        <label>Email</label>
         <div class="bar"></div>
       </div>
 		

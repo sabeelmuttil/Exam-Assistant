@@ -100,7 +100,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	  
     <title>
-      Admin Register 
+        Exam-Assistant
     </title>
 	  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 	  <meta name="viewport" content="width=device-width" />
@@ -171,7 +171,7 @@
 				<li>
                     <a href="qtionmangr.php">
                         <i class="pe-7s-pen"></i>
-                        <p>Quotation Manager</p>
+                        <p>Question Manager</p>
                     </a>
                 </li>
 				
@@ -184,7 +184,7 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     
-                    <a class="navbar-brand" href="#">Profile</a>
+                    <a class="navbar-brand" href="#">Admin Register</a>
                 </div>
                 <div class="collapse navbar-collapse">
 
@@ -228,7 +228,7 @@
 								 <li>
 									 <a href="qtionmangr.php">
 										
-										 <p>Quotation Manager</p>
+										 <p>Question Manager</p>
 									 </a>
 								  </li>
 								  <li>
@@ -267,13 +267,12 @@
 							</div>
 		  				</div>
 
-		  				<div class="input-container">
-							<input type="email" name="email" required="required"/>
-							<label for="lblemail">Email Id</label>
-							<div class="bar">
-								<?php echo $emailError; ?>
-							</div>
-		  				</div>
+						<div class="input-container">
+							<input type="email" name="email" required="required"  maxlength="40" />
+							<label>Email</label>
+							<div class="bar"> <?php echo $emailError; ?></div>
+							
+						</div>
 
 		  				<div class="input-container">
 							<input type="Password" name="pass" required="required"/>

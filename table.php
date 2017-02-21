@@ -86,7 +86,7 @@
 				<li>
                     <a href="qtionmangr.php">
                         <i class="pe-7s-pen"></i>
-                        <p>Quotation Manager</p>
+                        <p>Question Manager</p>
                     </a>
                 </li>
 				
@@ -99,7 +99,7 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     
-                    <a class="navbar-brand" href="#">Profile</a>
+                    <a class="navbar-brand" href="#">Result</a>
                 </div>
                 <div class="collapse navbar-collapse">
 
@@ -143,7 +143,7 @@
 								 <li>
 									 <a href="qtionmangr.php">
 										
-										 <p>Quotation Manager</p>
+										 <p>Question Manager</p>
 									 </a>
 								  </li>
 								  <li>
