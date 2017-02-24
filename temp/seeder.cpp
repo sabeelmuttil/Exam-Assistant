@@ -44,8 +44,8 @@ int main (int argc, char *argv[])
 																																rndnum=rand()%COUNT;
 																								} while(i<=rndnum&&COUNT>rndnum);
 																								//swap
-																								char ti[1];
-																								ti[0]=Stree[i];
+																								string ti;
+																								ti=Stree[i];
 																								Stree[i]=Stree[rndnum];
 																								Stree[rndnum]=ti;
 
