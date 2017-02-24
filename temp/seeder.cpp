@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-# include <stdlib.h>
+#include <stdlib.h>
 using namespace std;
 inline bool exist(const std::string& name)
 {
@@ -34,8 +34,16 @@ int main (int argc, char *argv[])
 																for(int i = 0; i < COUNT; ++i)
 																{
 																								trees >> Stree[i];
-																}
 
+																}
+																//Shuffling algorithm
+
+																int rndnum=-99;
+																for (int i = 0; i < COUNT-2; i++) {
+																								do {
+																																rndnum=rand()%COUNT;
+																								} while(i<=rndnum&&COUNT>rndnum);
+																}
 
 								}
 								else{
