@@ -49,11 +49,14 @@ int main (int argc, char *argv[])
 																								Stree[i]=Stree[rndnum];
 																								Stree[rndnum]=ti;
 
-																}
+																}//End of algorithm
 
 								}
 								else{
-																//Starting exam
+																//Starting new exam
+																//TODO:@end create file exam.flag
+
+
 
 								}
 								return 0;
