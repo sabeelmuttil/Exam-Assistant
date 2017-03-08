@@ -11,6 +11,134 @@
   // select loggedin users detail
   $res=mysql_query("SELECT * FROM admin WHERE admid=".$_SESSION['admi']);
   $userRow=mysql_fetch_array($res);
+
+
+  $get=mysql_query("SELECT qid FROM question ORDER BY id DESC LIMIT 1");
+  $last=mysql_fetch_array($get);
+
+  $error = false;
+
+    if ( isset($_POST['btnadd']) ) 
+    {
+
+        $qid = trim($_POST['qid']);
+        $qid = strip_tags($qid);
+        $qid = htmlspecialchars($qid);
+
+        $qname = trim($_POST['qname']);
+        $qname = strip_tags($qname);
+        $qname = htmlspecialchars($qname);
+
+        $qansa = trim($_POST['qansa']);
+        $qansa = strip_tags($qansa);
+        $qansa = htmlspecialchars($qansa);
+
+        $qansb = trim($_POST['qansb']);
+        $qansb = strip_tags($qansb);
+        $qansb = htmlspecialchars($qansb);
+
+        $qansc = trim($_POST['qansc']);
+        $qansc = strip_tags($qansc);
+        $qansc = htmlspecialchars($qansc);
+
+        $qansd = trim($_POST['qansd']);
+        $qansd = strip_tags($qansd);
+        $qansd = htmlspecialchars($qansd);
+
+        // id validation
+        if (empty($qid)) {
+            $error = true;
+            $idError = "Please enter Question Id.";
+        } 
+        else 
+        {
+        // check id exist or not
+            $query = "SELECT qid FROM question WHERE qid='$qid'";
+            $result = mysql_query($query);
+            $count = mysql_num_rows($result);
+
+            if($count!=0)
+            {
+                $error = true;
+                $idError = "Provided Id is already in use.";
+            }
+        }
+
+    
+        //qname validation
+        if ( empty($qname) ) 
+        {
+            $error = true;
+            $qnameError = "Please enter Question.";
+        } 
+        
+        
+        // ans validation
+        if (empty($qansa)){
+            $error = true;
+            $qansError = "Please enter Question.";
+        }
+
+        if (empty($qansb)){
+            $error = true;
+            $qansError = "Please enter Question.";
+        } 
+
+        if (empty($qansc)){
+            $error = true;
+            $qansError = "Please enter Question.";
+        } 
+
+        if (empty($qansd)){
+            $error = true;
+            $qansError = "Please enter Question.";
+        } 
+
+
+        if(isset($_POST['Radio']))
+        {
+            $wans = $_POST['Radio'];
+
+             if ($wans == "1") 
+             {
+               $wans = "1";
+             }
+             else if ($wans == "2") {
+                 $wans = "2";
+             } 
+             else if ($wans == "3") {
+                $wans = "3";
+             } 
+             else if ($wans == "4") {
+                $wans = "4";
+             } 
+
+        }
+           
+        else{
+            $error = true;
+            $an= "Please choose any option .";
+        }         
+            
+        if( !$error ) {
+            
+            $query = "INSERT INTO question(qid,qtion,ans,ans1,ans2,ans3,ans4) VALUES('$qid','$qname','$wans','$qansa','$qansb','$qansc','$qansd')";
+            $res = mysql_query($query);
+                
+            if ($conn->$res===true) {
+                $errTyp = "success";
+                $errMSG = "Successfully registered, you may login now";
+                unset($name);
+                unset($email);
+                unset($pass);
+            } else {
+                $errTyp = "danger";
+                $errMSG = "Something went wrong, try again later...";   
+            }   
+                
+        } 
+    }
+
 ?>
 
 <!doctype html>
@@ -101,7 +229,12 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="#">Question Manager</a>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -156,7 +289,6 @@
 								  </li>
                               </ul>
                         </li>
-                        
                     </ul>
                 </div>
             </div>
@@ -174,23 +306,72 @@
 							
 							<div class="content">
                                 <form method="post" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-									 <div class="row">
+									 
+                                     <div class="row">
+                                         <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Question Id</label>
+                                                <input type="text" class="form-control" placeholder="Question Id" name="qid">
+                                                
+                                             </div>
+
+                                         </div>
+
+                                         <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span style="color: blue;">  Last Question Id is <b style="color: red;"> <?php echo  $last['qid']; ?> </b> </span>
+                                             </div>
+
+                                         </div>
+                                    </div>
+
+                                     <div class="row">
 										 <div class="col-md-12">
                                             <div class="form-group">
 												<label>Question</label>
-												<textarea class="form-control" placeholder="Enter Question.."></textarea>
+												<textarea class="form-control" placeholder="Enter Question.." name="qname"></textarea>
 											 </div>
 										 </div>
 									</div>
-									
+                                        <?php echo "You must be select any options.!    <b> This option is right answer</b>" ?>
 									<div class="row">
-										 <div class="col-md-12">
+										 <div class="col-md-6">
                                             <div class="form-group">
-												<label>Answer</label>
-												<textarea class="form-control" placeholder="Enter Corresponding Answers.."></textarea>
-											 </div>
+												<label>Option A</label>
+                                                <input type="Radio" class="pull-left" name="Radio" value="1">
+            
+												<textarea class="form-control" placeholder="Option A" name="qansa"></textarea>
+											 
+                                             </div>
 										 </div>
-									</div>
+
+                                         <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Option B</label>
+                                                <input type="Radio" class="pull-left" name="Radio" value="2">
+                                                <textarea class="form-control" placeholder="Option B" name="qansb"></textarea>
+                                             </div>
+                                         </div>
+                                    </div>
+
+                                    <div class="row">
+                                         <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Option C</label>
+                                                <input type="Radio" class="pull-left" name="Radio" value="3">
+                                                <textarea class="form-control" placeholder="Option C" name="qansc"></textarea>
+                                             </div>
+                                         </div>
+                                    
+                                         <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Option D</label>
+                                                <input type="Radio" class="pull-left" name="Radio" value="4">
+                                                <textarea class="form-control" placeholder="Option D" name="qansd"></textarea>
+                                             </div>
+                                         </div>
+                                    </div>
+                                    <span style="color: red;"> <?php $an; ?></span>
 									<div class="row">
 										<div class="col-md-8">
 											<button type="submit" id="btnadd" name="btnadd" class="btn btn-info btn-fill pull-right">Add Question</button>

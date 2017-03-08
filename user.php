@@ -280,7 +280,12 @@
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="#">Profile</a>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -430,16 +435,19 @@
                                         </div>
                                     </div>
 									<?php echo $errMSG; ?>
-									<div class="row">
-                                        <div class="col-md-3">
-                                    		<input type="checkbox" class="btn btn-info btn-fill pull-left" id="btn">
-											<p>Edit</p>
-										</div>
-										<div class="col-md-3">
-											<button type="submit" id="btnupdate" name="btnupdate" class="btn btn-info btn-fill pull-right">Update Profile</button>
-										</div>
-										<!--<button onclick="refun()">Refresh</button>-->
-									</div>
+									
+                       
+                                     			        <div class="row">
+                                      			          	<div class="col-md-3 ">
+                                                  		     	 <input type="checkbox" class="btn btn-info btn-fill pull-left"  name="btn" id="btn">
+                                                  		     	 <p>Edit</p>                                            
+                                                  		    </div>
+                                                		 
+ 															<div class="col-md-3">
+																<button type="submit" id="btnupdate" name="btnupdate" class="btn btn-info btn-fill pull-right">Update Profile</button>
+															</div>
+ 														</div>
+									
 								
 								
 								<hr/>
