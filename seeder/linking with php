@@ -1,0 +1,10 @@
+ 
+http://stackoverflow.com/questions/20814600/php-reading-textfile-word-by-word
+
+<?php
+$arr = file('seeder/output.txt');
+foreach($arr as $val)
+{
+echo ($val); // Just a demonstration ..
+}
+?>
