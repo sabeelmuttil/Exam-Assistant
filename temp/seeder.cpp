@@ -11,7 +11,9 @@ inline bool exist(const std::string& name)
 								else           // If the file was found, then file is non-0.
 																return true; // The file was found.
 }
-
+inline double randd() {
+								return (double)rand() / ((double)RAND_MAX + 1);
+}
 
 int main (int argc, char *argv[])
 {
@@ -20,6 +22,8 @@ int main (int argc, char *argv[])
 								int COUNT=0;
 								cout << argv[1] << endl;
 								cout << argv[2] << endl;
+								srand((unsigned int)time(NULL));
+								std::cout << "Seeded randomizer" << '\n';
 								//contains argument 1
 								//check if exam exists;
 								if(argc>2) {
