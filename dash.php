@@ -11,6 +11,50 @@
   // select loggedin users detail
   $res=mysql_query("SELECT * FROM admin WHERE admid=".$_SESSION['admi']);
   $userRow=mysql_fetch_array($res);
+
+  $error = false;
+
+    if ( isset($_POST['btnadd']) ) 
+    {
+
+        $sub = trim($_POST['sub']);
+        $sub = strip_tags($sub);
+        $sub = htmlspecialchars($sub);
+
+        if (empty($sub)) {
+            $error = true;
+            $check = "Please enter subject.";
+        }
+        else{
+            $val = mysql_query("SELECT 1 FROM $sub");
+
+            if($val !== FALSE)
+            {
+                $error = true;
+                $check = "subject is already Exists";
+
+            }elseif( !$error ) {
+            
+                $query = "CREATE TABLE `$sub` (`id` int(100) NOT NULL,`qid` varchar(100) NOT NULL,`qtion` varchar(100) NOT NULL,`ans` varchar(100) NOT NULL,`ans1` varchar(100) NOT NULL,`ans2` varchar(100) NOT NULL,`ans3` varchar(100) NOT NULL,`ans4` varchar(100) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+
+                $res = mysql_query($query);
+                        
+                $query1 = "INSERT INTO subject(subname) VALUES('$sub')";
+                $res1 = mysql_query($query1);
+
+                if ($conn->$res===true && $conn->$res1===true) {
+
+                    $errTyp = "success";
+                    $check = "subject adding problem ! try again after some time";
+                    unset($sub);
+                
+                }else{
+                    $check = "succesfuly created";
+                }
+            }    
+        }      
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +90,17 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+    <script type="text/javascript">
+        $(".dropdown-menu li a").click(function(){
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+        });
+
+        function blockSpecialChar(e) {
+            var k = e.keyCode;
+            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8   || (k >= 48 && k <= 57));
+        }
+    </script>
 </head>
 <body>
 
@@ -57,7 +112,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://ninjaturtles.tk/" target="_blank" class="simple-text">
+                <a href="http://twobits.tk/" target="_blank" class="simple-text">
                     Two Bits
                 </a>
             </div>
@@ -172,33 +227,36 @@
 
 
         <div class="content">
+            <form method="post" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Email Statistics</h4>
-                                <p class="category">Last Campaign Performance</p>
+                                <h4 class="title">Add Subjects</h4>
+                                <p class="category">Enter to add subjects</p>
                             </div>
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                                <div class="container">
+                                    <div class="btn-group">
+                                        <div style="color: #a186d2;" class="btn btn-simple " >
 
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                            <input class="form-control" type="text" name="sub" value="" onkeypress="return blockSpecialChar(event)"/><?php echo $check ?>
+                                            <br>
+                                            <span style="color: red;"><b>*</b> special characters & spaces are not allowed </span>
+                                            <br>
+                                            <button  type="submit" id="btnadd" name="btnadd" class="btn btn-info btn-fill pull-right">Add</button>
+
+                                        </div>
                                     </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-                                    </div>
+  
                                 </div>
+
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Users Behavior</h4>
@@ -221,7 +279,7 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="clearfix"></div>
 
 
                 <div class="row">
@@ -303,73 +361,74 @@
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Read "Following makes Medium better"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Unfollow 5 enemies from twitter</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" value="" data-toggle="checkbox">
+                                                        </label>
+                                                    </td>
+                                                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" value="" data-toggle="checkbox">
+                                                        </label>
+                                                    </td>
+                                                    <td>Read "Following makes Medium better"</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" value="" data-toggle="checkbox">
+                                                        </label>
+                                                    </td>
+                                                    <td>Unfollow 5 enemies from twitter</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    <div class="footer">
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
 

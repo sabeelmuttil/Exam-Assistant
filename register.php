@@ -138,7 +138,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://ninjaturtles.tk/" target="_blank" class="simple-text">
+                <a href="http://twobits.tk/" target="_blank" class="simple-text">
                     Two Bits
                 </a>
             </div>

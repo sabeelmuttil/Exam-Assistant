@@ -12,6 +12,21 @@
   $res=mysql_query("SELECT * FROM admin WHERE admid=".$_SESSION['admi']);
   $userRow=mysql_fetch_array($res);
 
+    $pick=mysql_query("SELECT subname FROM subject");
+    $userRow1=mysql_fetch_array($pick);
+
+
+    /*$tbl = "SHOW TABLES FROM bookexam";
+    $tb = mysql_query($tbl);
+    $output = "<select name = 'venue'>";
+    while ($row = mysql_fetch_row($tb))
+    {
+        $sel = ($selected_venue_id == $row[0]) ? ' selected="selected"': '';
+        $output .= "\n\t<option value = '{$row[0]}'$sel>{$row[0]}</option>";
+    }
+    $output .= "\n</select>";
+    //later on - wherever you need it:
+    echo $output;*/
 
   $get=mysql_query("SELECT qid FROM question ORDER BY id DESC LIMIT 1");
   $last=mysql_fetch_array($get);
@@ -52,6 +67,7 @@
         } 
         else 
         {
+            
         // check id exist or not
             $query = "SELECT qid FROM question WHERE qid='$qid'";
             $result = mysql_query($query);
@@ -62,6 +78,7 @@
                 $error = true;
                 $idError = "Provided Id is already in use.";
             }
+            
         }
 
     
@@ -127,15 +144,18 @@
                 
             if ($conn->$res===true) {
                 $errTyp = "success";
-                $errMSG = "Successfully registered, you may login now";
-                unset($name);
-                unset($email);
-                unset($pass);
+                $errMSG = "Successfully added question";
+                unset($qid);
+                unset($qname);
+                unset($qansa);
+                unset($qansb);
+                unset($qansc);
+                unset($qansd);
             } else {
                 $errTyp = "danger";
                 $errMSG = "Something went wrong, try again later...";   
             }   
-                
+              
         } 
     }
 
@@ -165,7 +185,10 @@
 
     <!--  Light Bootstrap Table core CSS    -->
     <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <link href="css/bootstrap-select.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/bootstrap-combobox.css">
 
+    <script src="js/bootstrap-combobox.js"></script>
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -173,7 +196,15 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
 		<script src="js/jquery-1.9.1.js"></script>
-		
+		<script src="js/bootstrap-select.min..js"></script>
+
+        <style type="text/css">
+            /* Adjust feedback icon position */
+            #productForm .selectContainer .form-control-feedback,
+            #productForm .inputGroupContainer .form-control-feedback {
+                right: -15px;
+            }
+        </style>
 	</head>
 <body>
 <div class="wrapper">
@@ -184,7 +215,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://ninjaturtles.tk/" target="_blank" class="simple-text">
+                <a href="http://twobits.tk/" target="_blank" class="simple-text">
                     Two Bits
                 </a>
             </div>
@@ -307,40 +338,80 @@
 							<div class="content">
                                 <form method="post" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 									 
-                                     <div class="row">
-                                         <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Question Id</label>
-                                                <input type="text" class="form-control" placeholder="Question Id" name="qid">
+                                                <input type="text" class="form-control" value="<?php echo  $idError; ?>" placeholder="Question Id" name="qid">
+
+                                                <div class="form-group">
+                                                    <span style="color: blue;">  Last Question Id is 
+                                                        <b style="color:green;"> 
+                                                            <?php 
+                                                          
+                                                                if (empty($last['qid']))
+                                                                {
+                                                                   $qid1="No question in here ! add 1st question";
+                                                                }else{
+                                                                    $qid1=$last['qid'];
+                                                                } 
+                                                                echo $qid1;
+                                                            ?> 
+                                                        </b> 
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-9">
+                                          <div class="form-group">
+                                            <label >Select subjects</label>
+                                            <div class=" selectContainer ">
                                                 
-                                             </div>
+                                                    <?php 
 
-                                         </div>
+                                                        $conn = mysql_connect('localhost','root','');
+                                                        mysql_select_db('bookexam',$conn);
+                                                        
+                                                        $subn = "SELECT subname from subject order by id";
+                                                        $rslt = mysql_query($subn,$conn);
 
-                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <span style="color: blue;">  Last Question Id is <b style="color: red;"> <?php echo  $last['qid']; ?> </b> </span>
-                                             </div>
+                                                        $selectbox='<select class="form-control" name="subject">';
 
-                                         </div>
+                                                        while ($row = mysql_fetch_assoc($rslt)) {
+                                                            
+                                                            $selectbox.='<option value=\"' . $row['subname'] . '\">' . $row['subname'] . '</option>';
+                                                        }
+
+                                                        $selectbox.='</select>';
+                                                        mysql_free_result($rslt);
+                                                        echo $selectbox;
+                                                    ?>
+
+                                                    
+                                            </div>
+                                          </div>
+                                        </div>       
                                     </div>
 
                                      <div class="row">
 										 <div class="col-md-12">
                                             <div class="form-group">
 												<label>Question</label>
-												<textarea class="form-control" placeholder="Enter Question.." name="qname"></textarea>
+												<textarea class="form-control" placeholder="Enter Question.." name="qname"><?php echo  $qnameError; ?></textarea>
 											 </div>
 										 </div>
 									</div>
-                                        <?php echo "You must be select any options.!    <b> This option is right answer</b>" ?>
+                                        <p style="color:red;"> <?php echo "You must be select any options.!    <b> This option is right answer</b>" ?></p>
 									<div class="row">
 										 <div class="col-md-6">
                                             <div class="form-group">
 												<label>Option A</label>
                                                 <input type="Radio" class="pull-left" name="Radio" value="1">
             
-												<textarea class="form-control" placeholder="Option A" name="qansa"></textarea>
+												<textarea class="form-control" placeholder="Option A" name="qansa"><?php echo  $qansError; ?></textarea>
 											 
                                              </div>
 										 </div>
@@ -349,7 +420,7 @@
                                             <div class="form-group">
                                                 <label>Option B</label>
                                                 <input type="Radio" class="pull-left" name="Radio" value="2">
-                                                <textarea class="form-control" placeholder="Option B" name="qansb"></textarea>
+                                                <textarea class="form-control" placeholder="Option B" name="qansb"><?php echo  $qansError; ?></textarea>
                                              </div>
                                          </div>
                                     </div>
@@ -359,7 +430,7 @@
                                             <div class="form-group">
                                                 <label>Option C</label>
                                                 <input type="Radio" class="pull-left" name="Radio" value="3">
-                                                <textarea class="form-control" placeholder="Option C" name="qansc"></textarea>
+                                                <textarea class="form-control" placeholder="Option C" name="qansc"><?php echo  $qansError; ?></textarea>
                                              </div>
                                          </div>
                                     
@@ -367,11 +438,11 @@
                                             <div class="form-group">
                                                 <label>Option D</label>
                                                 <input type="Radio" class="pull-left" name="Radio" value="4">
-                                                <textarea class="form-control" placeholder="Option D" name="qansd"></textarea>
+                                                <textarea class="form-control" placeholder="Option D" " name="qansd"> <?php echo $qansError ?> </textarea>
                                              </div>
                                          </div>
                                     </div>
-                                    <span style="color: red;"> <?php $an; ?></span>
+                                    <span style="color: red;"> <?php echo $an; ?></span>
 									<div class="row">
 										<div class="col-md-8">
 											<button type="submit" id="btnadd" name="btnadd" class="btn btn-info btn-fill pull-right">Add Question</button>
