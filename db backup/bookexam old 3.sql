@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2017 at 04:41 AM
+-- Generation Time: Feb 21, 2017 at 05:37 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -50,30 +50,6 @@ INSERT INTO `admin` (`admid`, `schlname`, `admname`, `name`, `admemail`, `admpas
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question`
---
-
-CREATE TABLE `question` (
-  `id` int(100) NOT NULL,
-  `qid` varchar(100) NOT NULL,
-  `qtion` varchar(100) NOT NULL,
-  `ans` varchar(100) NOT NULL,
-  `ans1` varchar(100) NOT NULL,
-  `ans2` varchar(100) NOT NULL,
-  `ans3` varchar(100) NOT NULL,
-  `ans4` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `question`
---
-
-INSERT INTO `question` (`id`, `qid`, `qtion`, `ans`, `ans1`, `ans2`, `ans3`, `ans4`) VALUES
-(1, 'q111111', 'ewhrrrrrrrrrrrrrrrrrrrrrrrrrrrrr', '', 'rth', 'tryj', 'yjetjty', 'jeytjt');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -96,13 +72,6 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`admid`);
 
 --
--- Indexes for table `question`
---
-ALTER TABLE `question`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `qid` (`qid`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -117,11 +86,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `admin`
   MODIFY `admid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT for table `question`
---
-ALTER TABLE `question`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --

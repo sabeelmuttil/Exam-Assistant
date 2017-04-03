@@ -12,26 +12,8 @@
   $res=mysql_query("SELECT * FROM admin WHERE admid=".$_SESSION['admi']);
   $userRow=mysql_fetch_array($res);
 
-    $pick=mysql_query("SELECT subname FROM subject");
-    $userRow1=mysql_fetch_array($pick);
-
-
-    /*$tbl = "SHOW TABLES FROM bookexam";
-    $tb = mysql_query($tbl);
-    $output = "<select name = 'venue'>";
-    while ($row = mysql_fetch_row($tb))
-    {
-        $sel = ($selected_venue_id == $row[0]) ? ' selected="selected"': '';
-        $output .= "\n\t<option value = '{$row[0]}'$sel>{$row[0]}</option>";
-    }
-    $output .= "\n</select>";
-    //later on - wherever you need it:
-    echo $output;*/
-
-  $get=mysql_query("SELECT qid FROM question ORDER BY id DESC LIMIT 1");
-  $last=mysql_fetch_array($get);
-
   $error = false;
+  
 
     if ( isset($_POST['btnadd']) ) 
     {
@@ -39,6 +21,10 @@
         $qid = trim($_POST['qid']);
         $qid = strip_tags($qid);
         $qid = htmlspecialchars($qid);
+
+        $cmbsbjct1 = trim($_POST['cmbsbjct1']);
+        $cmbsbjct1 = strip_tags($cmbsbjct1);
+        $cmbsbjct1 = htmlspecialchars($cmbsbjct1);
 
         $qname = trim($_POST['qname']);
         $qname = strip_tags($qname);
@@ -69,7 +55,7 @@
         {
             
         // check id exist or not
-            $query = "SELECT qid FROM question WHERE qid='$qid'";
+            $query = "SELECT qid FROM $cmbsbjct1 WHERE qid='$qid'";
             $result = mysql_query($query);
             $count = mysql_num_rows($result);
 
@@ -135,11 +121,16 @@
         else{
             $error = true;
             $an= "Please choose any option .";
-        }         
+        }
+        if ($cmbsbjct1==1) {
+            $error = true;
+            $suberr= "Please choose subject .";
+        }   
+
             
         if( !$error ) {
             
-            $query = "INSERT INTO question(qid,qtion,ans,ans1,ans2,ans3,ans4) VALUES('$qid','$qname','$wans','$qansa','$qansb','$qansc','$qansd')";
+            $query = "INSERT INTO $cmbsbjct1(qid,qtion,ans,ans1,ans2,ans3,ans4) VALUES('$qid','$qname','$wans','$qansa','$qansb','$qansc','$qansd')";
             $res = mysql_query($query);
                 
             if ($conn->$res===true) {
@@ -195,9 +186,11 @@
 	
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <script language="javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script src="js/jquery-1.9.1.js"></script>
-		<script src="js/bootstrap-select.min..js"></script>
+		<script src="js/bootstrap-select.min.js"></script>
 
+        
         <style type="text/css">
             /* Adjust feedback icon position */
             #productForm .selectContainer .form-control-feedback,
@@ -251,6 +244,74 @@
                         <p>Question Manager</p>
                     </a>
                 </li>
+                <br>
+                <br>
+                <li>
+                    <form method="post" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                                
+                    <div class="form-group">
+                        <label >Select Subjects To Check Last Value Of Table</label>
+                        <br>
+                            <div class=" selectContainer ">
+                                                
+                                <?php 
+
+                                    $conn = mysql_connect('localhost','root','');
+                                    mysql_select_db('bookexam',$conn);
+                                                        
+                                    $subn = "SELECT subname from subject order by id";
+                                    $rslt = mysql_query($subn,$conn);
+                                                        
+                                ?>
+                                <select class="form-control" name="cmbsbjct" id="cmbsbjct">
+
+                                    <option value="1">Check Question id</option>
+                                        <?php while($row = mysql_fetch_assoc($rslt)) { ?>
+                                            <option value="<?php echo $row['subname']; ?>"><?php echo $row['subname']; ?></option>
+                                            <?php }  ?>
+                                    </select>
+                                    <?php mysql_free_result($rslt); ?>
+                                    <br>
+                                    <div class="form-group">
+                                        <span >  Last Question Id is 
+                                            <b > 
+                                                <?php 
+                                                    if ( isset($_POST['btnchk']) ) 
+                                                    {
+                                                        $cmbsbjct = trim($_POST['cmbsbjct']);
+                                                        
+                                                        
+                                                        $last = mysql_query("SELECT qid from $cmbsbjct order by id desc limit 1;");
+                                                        if ($cmbsbjct==1) {
+                                                            $maxqid="Must select any option .";
+                                                            echo $maxqid;
+                                                        }
+
+                                                         else if (mysql_num_rows($last)>0) {
+                                                                $maxqid=mysql_fetch_array($last);
+                                                                echo $maxqid[0];    
+                                                         }
+                                                         else{
+
+                                                            $maxqid="No question in here ! add 1st question";
+                                                            echo $maxqid;
+                                                        }
+                                                    
+                                                    }                                                 
+                                                ?> 
+                                            </b> 
+                                        </span>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <button type="submit" id="btnchk" name="btnchk" class="btn btn-info btn-fill pull-right">Check</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                    </div>
+                    </form>
+                </li>  
 				
             </ul>
     	</div>
@@ -271,55 +332,56 @@
                 <div class="collapse navbar-collapse">
 
                     <ul class="nav navbar-nav navbar-right">
-						
+                        
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								  
+                                  
                                     <?php echo $userRow['admname']; ?>
                                     <b class="caret"></b>
                               </a>
                               <ul class="dropdown-menu">
-								  <li>
-									  <a href="user.php">Account</a>
-								  </li>
-								  
-								 <li >
-									 <a href="dash.php">
-										 
-										 <p>Dashboard</p>
-									 </a>
-								  </li>
-								  <li >
-									  <a href="user.php">
-										  
-										  <p>User Profile</p>
-									  </a>
-								  </li>
-								  <li>
-									  <a href="table.php">
-										  
-										  <p>Result</p>
-									  </a>
-                				  </li>
-								  <li>
-									  <a href="register.php">
-										   
-										   <p>Add Admin's</p>
-									  </a>
-							     </li>
-								 <li>
-									 <a href="qtionmangr.php">
-										
-										 <p>Question Manager</p>
-									 </a>
-								  </li>
-								  <li>
-									  <a href="logout.php?logout">
+                                  <li>
+                                      <a href="user.php">Account</a>
+                                  </li>
+                                  
+                                 <li >
+                                     <a href="dash.php">
+                                         
+                                         <p>Dashboard</p>
+                                     </a>
+                                  </li>
+                                  <li >
+                                      <a href="user.php">
+                                          
+                                          <p>User Profile</p>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="table.php">
+                                          
+                                          <p>Result</p>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="register.php">
+                                           
+                                           <p>Add Admin's</p>
+                                      </a>
+                                 </li>
+                                 <li>
+                                     <a href="qtionmangr.php">
+                                        
+                                         <p>Question Manager</p>
+                                     </a>
+                                  </li>
+                                  <li>
+                                      <a href="logout.php?logout">
                                 Log out
-									  </a>
-								  </li>
+                                      </a>
+                                  </li>
                               </ul>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -344,22 +406,7 @@
                                                 <label>Question Id</label>
                                                 <input type="text" class="form-control" value="<?php echo  $idError; ?>" placeholder="Question Id" name="qid">
 
-                                                <div class="form-group">
-                                                    <span style="color: blue;">  Last Question Id is 
-                                                        <b style="color:green;"> 
-                                                            <?php 
-                                                          
-                                                                if (empty($last['qid']))
-                                                                {
-                                                                   $qid1="No question in here ! add 1st question";
-                                                                }else{
-                                                                    $qid1=$last['qid'];
-                                                                } 
-                                                                echo $qid1;
-                                                            ?> 
-                                                        </b> 
-                                                    </span>
-                                                </div>
+                                                
 
                                             </div>
 
@@ -378,29 +425,27 @@
                                                         $subn = "SELECT subname from subject order by id";
                                                         $rslt = mysql_query($subn,$conn);
 
-                                                        $selectbox='<select class="form-control" name="subject">';
 
-                                                        while ($row = mysql_fetch_assoc($rslt)) {
-                                                            
-                                                            $selectbox.='<option value=\"' . $row['subname'] . '\">' . $row['subname'] . '</option>';
-                                                        }
-
-                                                        $selectbox.='</select>';
-                                                        mysql_free_result($rslt);
-                                                        echo $selectbox;
+                                                        
                                                     ?>
+                                                    <select class="form-control" name="cmbsbjct1" id="cmbsbjct">
 
-                                                    
+                                                        <option value="1">Select subject type</option>
+                                                        <?php while($row = mysql_fetch_assoc($rslt)) { ?>
+                                                            <option value="<?php echo $row['subname']; ?>"><?php echo $row['subname']; ?></option>
+                                                        <?php }  ?>
+                                                    </select>
+                                                    <?php mysql_free_result($rslt); ?>
                                             </div>
                                           </div>
                                         </div>       
                                     </div>
-
+                                        <span style="color: red;"><?php echo $suberr; ?></span>
                                      <div class="row">
 										 <div class="col-md-12">
                                             <div class="form-group">
 												<label>Question</label>
-												<textarea class="form-control" placeholder="Enter Question.." name="qname"><?php echo  $qnameError; ?></textarea>
+												<textarea class="form-control" placeholder="Enter Question.." name="qname" id="qname"><?php echo  $output; ?></textarea>
 											 </div>
 										 </div>
 									</div>
@@ -480,7 +525,29 @@
    
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="js/light-bootstrap-dashboard.js"></script>
-
-
+    <script>
+$(document).ready(function(){
+    $('.action').change(function(){
+        if($(this).val() != '')
+        {
+            var action = $(this).attr("id");
+            var query = $(this).val();
+            var result = '';
+            if(action == "cmbsbjct")
+            {
+                result = 'qname';
+            }
+            $.ajax({
+                url:"fetch.php",
+                method:"POST",
+                data:{action:action, query:query},
+                success:function(data){
+                    $('#'+result).html(data);
+                }
+            })
+        }
+    });
+});
+    </script>
 </html>
 <?php ob_end_flush(); ?>

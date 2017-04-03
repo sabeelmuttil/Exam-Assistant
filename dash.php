@@ -227,7 +227,7 @@
 
 
         <div class="content">
-            <form method="post" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            <form method="post" role="form" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
@@ -243,7 +243,7 @@
 
                                             <input class="form-control" type="text" name="sub" value="" onkeypress="return blockSpecialChar(event)"/><?php echo $check ?>
                                             <br>
-                                            <span style="color: red;"><b>*</b> special characters & spaces are not allowed </span>
+                                            <span class="category"style="color: red;"><b>*</b> symbols & spaces are not allowed </span>
                                             <br>
                                             <button  type="submit" id="btnadd" name="btnadd" class="btn btn-info btn-fill pull-right">Add</button>
 
@@ -254,32 +254,65 @@
 
                             </div>
                         </div>
+
                     </div>
 
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">24 Hours performance</p>
+                                <h4 class="title">Start Exam</h4>
+                                <p class="category">Select exam subjects</p>
                             </div>
                             <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
-                                        <i class="fa fa-circle text-warning"></i> Click Second Time
+                                <div class="container">
+                                    <div class="btn-group">
+                                        <div  >
+
+                                            <span class="category" style="color: red;"><b>*</b> You must select atleast one subject</span>
+                                            <br><br>
+                                            <?php 
+
+                                                $conn = mysql_connect('localhost','root','');
+                                                mysql_select_db('bookexam',$conn);
+                                                        
+                                                $subn = "SELECT subname from subject order by id";
+                                                $rslt = mysql_query($subn,$conn);
+                                            ?>
+                                            
+                                                
+                                                    <?php 
+                                                        while($row = mysql_fetch_assoc($rslt)) { 
+                                                    ?>
+                                                            <input type="checkbox" name="subjct" value="<?php echo $row['subname']; ?>">
+                                                            <?php echo $row['subname']; ?><br>
+                                                            <br>
+                                                    <?php 
+                                                        }  
+                                                    ?>
+                                            <?php mysql_free_result($rslt); ?>
+                                            
+                                            <br>
+                                            <div class="row" align="center">
+
+                                                    <div class="col-md-6" >
+                                                        <button type="submit" id="start" name="start" class="btn btn-info btn-fill pull-right">Start</button>
+                                                    </div>
+                                                
+                                                    <div class="col-md-6" >
+                                                        <button  type="submit" id="stop" name="stop" class="btn btn-info btn-fill pull-right">Stop</button>
+                                                    </div>
+
+                                        </div>
                                     </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                                    </div>
+  
                                 </div>
+
                             </div>
                         </div>
                     </div>
+
                 </div>
-                <div class="clearfix"></div>
+                                <div class="clearfix"></div>
 
 
                 <div class="row">

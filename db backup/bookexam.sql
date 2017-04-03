@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2017 at 03:38 AM
+-- Generation Time: Apr 03, 2017 at 04:04 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -161,7 +161,9 @@ CREATE TABLE `test` (
 
 INSERT INTO `test` (`id`, `qid`, `qtion`, `ans`, `ans1`, `ans2`, `ans3`, `ans4`) VALUES
 (11, 'sh', 'r', 'th', 'tha', 'th', 't', 'th'),
-(11, 'sh', 'r', 'th', 'tha', 'th', 't', 'th');
+(11, 'sh', 'r', 'th', 'tha', 'th', 't', 'th'),
+(12, 'sgd1', 'dvdngnhn', '1', 'nhhhnh', 'hnrnhr', 'nrhhn', 'hrghg'),
+(0, 'q111', 'hdhfhgf', '2', 'ccbjkfvbfd', 'kjjjf', 'jhdsfh', 'hghd');
 
 -- --------------------------------------------------------
 
