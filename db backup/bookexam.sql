@@ -63,7 +63,7 @@ CREATE TABLE `chemistry` (
   `ans2` varchar(100) NOT NULL,
   `ans3` varchar(100) NOT NULL,
   `ans4` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE `maths` (
   `ans2` varchar(100) NOT NULL,
   `ans3` varchar(100) NOT NULL,
   `ans4` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -97,7 +97,7 @@ CREATE TABLE `physics` (
   `ans2` varchar(100) NOT NULL,
   `ans3` varchar(100) NOT NULL,
   `ans4` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `social` (
   `ans2` varchar(100) NOT NULL,
   `ans3` varchar(100) NOT NULL,
   `ans4` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,7 @@ CREATE TABLE `social` (
 CREATE TABLE `subject` (
   `id` int(100) NOT NULL,
   `subname` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subject`
@@ -153,7 +153,7 @@ CREATE TABLE `test` (
   `ans2` varchar(100) NOT NULL,
   `ans3` varchar(100) NOT NULL,
   `ans4` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `test`
