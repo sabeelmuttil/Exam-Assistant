@@ -35,7 +35,7 @@
 
             }elseif( !$error ) {
             
-                $query = "CREATE TABLE `$sub` (`id` int(100) NOT NULL,`qid` varchar(100) NOT NULL,`qtion` varchar(100) NOT NULL,`ans` varchar(100) NOT NULL,`ans1` varchar(100) NOT NULL,`ans2` varchar(100) NOT NULL,`ans3` varchar(100) NOT NULL,`ans4` varchar(100) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+                $query = "CREATE TABLE `$sub` (`id` int(100) NOT NULL,`qid` varchar(100) NOT NULL,`qtion` varchar(100) NOT NULL,`ans` varchar(100) NOT NULL,`ans1` varchar(100) NOT NULL,`ans2` varchar(100) NOT NULL,`ans3` varchar(100) NOT NULL,`ans4` varchar(100) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
 
                 $res = mysql_query($query);
                         
